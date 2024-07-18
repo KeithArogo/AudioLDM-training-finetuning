@@ -15,7 +15,7 @@ expected_structure = {
     ],
     "dataset": {
         "audioset": ["zip_audios"],
-        "metadata": ["audiocaps", "dataset_root.json"],
+        "metadata": ["musicQA", "dataset_root.json"],
     },
 }
 
@@ -53,14 +53,14 @@ valid, message = validate_structure(copied_folder_path, expected_structure)
 print(message)
 print("Checking the validity of the audio datasets")
 metadata_json_list = [
-    "data/dataset/metadata/audiocaps/datafiles/audiocaps_train_label.json",
-    "data/dataset/metadata/audiocaps/testset_subset/audiocaps_test_nonrepeat_subset_0.json",
+    "data/dataset/metadata/musicQA/datafiles/audiocaps_train_label.json",
+    "data/dataset/metadata/musicQA/testset_subset/musicQA_test_nonrepeat_subset_0.json",
 ]
 missing_files_count = 0
 for metadata_json in metadata_json_list:
     metadata = load_json(metadata_json)["data"]
     for datapoint in tqdm(metadata):
-        audiopath = os.path.join("./data/dataset/audioset", datapoint["wav"])
+        audiopath = os.path.join("./data/dataset/audioset/zip_audios", datapoint["wav"])
         if not os.path.exists(audiopath):
             print(f"Missing file: {audiopath}")
             missing_files_count += 1
