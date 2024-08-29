@@ -121,7 +121,7 @@ def main(configs, exp_group_name, exp_name):
         limit_val_batches=100,
         callbacks=[checkpoint_callback],
         strategy=DDPStrategy(find_unused_parameters=True),
-        val_check_interval=2000,
+        val_check_interval=1500,
     )
 
     # TRAINING

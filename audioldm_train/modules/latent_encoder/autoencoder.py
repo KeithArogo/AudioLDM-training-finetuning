@@ -21,7 +21,7 @@ import soundfile as sf
 from audioldm_train.utilities.model_util import get_vocoder
 from audioldm_train.utilities.tools import synth_one_sample
 import itertools
-
+from python_speech_features import mfcc 
 
 class AutoencoderKL(pl.LightningModule):
     def __init__(
@@ -434,18 +434,17 @@ class AutoencoderKL(pl.LightningModule):
         inputs = inputs_dict[self.image_key]
         waveform = inputs_dict["waveform"]
         fnames = inputs_dict["fname"]
-
+        
+        # Forward pass
         reconstructions, posterior = self(inputs)
         save_path = os.path.join(
             self.get_log_dir(), "autoencoder_result_audiocaps", str(self.global_step)
         )
-
+        
+        # Decode the waveform for both original and reconstructed inputs
         if self.image_key == "stft":
             wav_prediction = self.decode_to_waveform(reconstructions)
             wav_original = waveform
-            self.save_wave(
-                wav_prediction, fnames, os.path.join(save_path, "stft_wav_prediction")
-            )
         else:
             wav_vocoder_gt, wav_prediction = synth_one_sample(
                 inputs.squeeze(1),
@@ -453,12 +452,56 @@ class AutoencoderKL(pl.LightningModule):
                 labels="validation",
                 vocoder=self.vocoder,
             )
-            self.save_wave(
-                wav_vocoder_gt, fnames, os.path.join(save_path, "fbank_vocoder_gt_wave")
-            )
-            self.save_wave(
-                wav_prediction, fnames, os.path.join(save_path, "fbank_wav_prediction")
-            )
+            wav_original = wav_vocoder_gt
+        
+        # Save waveforms
+        self.save_wave(wav_original, fnames, os.path.join(save_path, "original"))
+        self.save_wave(wav_prediction, fnames, os.path.join(save_path, "predicted"))
+
+        # Compute the reconstruction loss
+        recon_loss = F.mse_loss(reconstructions, inputs)
+        self.log('test/recon_loss', recon_loss)
+        
+        # Compute SNR
+        snr_value = self.compute_snr(wav_original, wav_prediction)
+        self.log('test/snr', snr_value)
+
+        # Compute MCD
+        mcd_value = self.compute_mcd(wav_original, wav_prediction)
+        self.log('test/mcd', mcd_value)
+
+        return {"recon_loss": recon_loss, "snr": snr_value, "mcd": mcd_value}
+
+    def compute_snr(self, original, predicted):
+        # Check if the input is a PyTorch tensor, if so, detach and convert to numpy
+        if isinstance(original, torch.Tensor):
+            original = original.detach().cpu().numpy()
+        
+        if isinstance(predicted, torch.Tensor):
+            predicted = predicted.detach().cpu().numpy()
+        
+        # Compute the signal (original) power and noise (difference) power
+        signal_power = np.mean(original ** 2)
+        noise_power = np.mean((original - predicted) ** 2)
+        
+        # Compute SNR in decibels (dB)
+        snr_value = 10 * np.log10(signal_power / noise_power)
+        return snr_value
+
+    def compute_mcd(self, original, predicted):
+        # Compute MFCC (Mel-frequency cepstral coefficients) from both original and predicted
+        original_mfcc = mfcc(original.squeeze(), samplerate=self.sampling_rate)
+        predicted_mfcc = mfcc(predicted.squeeze(), samplerate=self.sampling_rate)
+        
+        # Align the length of the MFCC sequences
+        min_length = min(len(original_mfcc), len(predicted_mfcc))
+        original_mfcc = original_mfcc[:min_length]
+        predicted_mfcc = predicted_mfcc[:min_length]
+
+        # Compute Mel-Cepstral Distortion (MCD)
+        diff = original_mfcc - predicted_mfcc
+        mcd_value = np.mean(np.sqrt((diff ** 2).sum(axis=1)))
+        return mcd_value
 
     def save_wave(self, batch_wav, fname, save_dir):
         os.makedirs(save_dir, exist_ok=True)
