@@ -1,23 +1,18 @@
 #!/bin/bash
 
-# Install Miniconda
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-bash miniconda.sh -b -p $HOME/miniconda
-export PATH="$HOME/miniconda/bin:$PATH"
-source $HOME/miniconda/bin/activate
+# Define environment names, paths, and cache directories
+CONDA_ENV_PATH="/mnt/fast/nobackup/scratch4weeks/ko00537/conda_envs/audioldm_train"
+CONDA_ENV_NAME="audioldm_train"
+PYTHON_VERSION="3.10"
+PROJECT_DIR="/mnt/fast/nobackup/scratch4weeks/ko00537/AudioLDM-training-finetuning"
 
-# Create and activate conda environment
-conda create -n audioldm_train python=3.10 -y
-source activate audioldm_train
+# Activate the Conda environment
+source activate ${CONDA_ENV_PATH}
 
-# Install poetry
-pip install poetry
+# Navigate to the project directory
+cd ${PROJECT_DIR}
 
-# Install dependencies using poetry
-poetry install
+# Run the main script using the new paths
+poetry run python3 audioldm_train/train/latent_diffusion.py -c audioldm_train/config/2023_08_23_reproduce_audioldm/audioldm_original.yaml --reload_from_ckpt data/checkpoints/audioldm-s-full
 
-# Install additional Python packages (if any)
-pip install pyyaml
 
-# Run the main script
-python3 audioldm_train/train/latent_diffusion.py -c audioldm_train/config/2023_08_23_reproduce_audioldm/audioldm_original.yaml --reload_from_ckpt data/checkpoints/audioldm-s-full
