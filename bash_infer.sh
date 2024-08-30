@@ -16,8 +16,8 @@ YAML_FILES=(
 
 # Array of corresponding checkpoint paths
 CHECKPOINT_PATHS=(
-    "log/latent_diffusion/2023_08_23_reproduce_audioldm/audioldm_original/checkpoints/checkpoint-fad-133.00-global_step=374999.ckpt"
-    "log/latent_diffusion/Best_Hyperparameter_Experiments/best_hyperparameter_experiments/checkpoints/checkpoint-fad-133.00-global_step=114999.ckpt"
+    "log/latent_diffusion/2023_08_23_reproduce_audioldm/audioldm_original/checkpoints/checkpoint-fad-133.00-global_step=164999.ckpt"
+    "log/latent_diffusion/Best_Hyperparameter_Experiments/best_hyperparameter_experiments/checkpoints/checkpoint-fad-133.00-global_step=374999.ckpt"
     "log/latent_diffusion/Best_Hyperparameter_Experiments/best_hyperparameter_experiments_newvae/checkpoints/checkpoint-fad-133.00-global_step=54999.ckpt"
     "log/latent_diffusion/Best_Hyperparameter_Experiments/best_hyperparameter_experiments_newvae2/checkpoints/checkpoint-fad-133.00-global_step=64999.ckpt"
 )
