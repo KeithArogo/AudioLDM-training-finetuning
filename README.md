@@ -19,7 +19,7 @@
 conda create -n audioldm_train python=3.10
 conda activate audioldm_train
 # Clone the repo
-git clone https://github.com/haoheliu/AudioLDM-training-finetuning.git; cd AudioLDM-training-finetuning
+git clone https://github.com/KeithArogo/AudioLDM-training-finetuning; cd AudioLDM-training-finetuning
 # Install running environment
 pip install poetry
 poetry install
@@ -28,8 +28,8 @@ poetry install
 ## Download checkpoints and dataset
 1. Download checkpoints from Google Drive: [link](https://drive.google.com/file/d/1T6EnuAHIc8ioeZ9kB1OZ_WGgwXAVGOZS/view?usp=drive_link). The checkpoints including pretrained VAE, AudioMAE, CLAP, 16kHz HiFiGAN, and 48kHz HiFiGAN.
 2. Uncompress the checkpoint tar file and place the content into **data/checkpoints/**
-3. Download the preprocessed AudioCaps from Google Drive: [link](https://drive.google.com/file/d/16J1CVu7EZPD_22FxitZ0TpOd__FwzOmx/view?usp=drive_link)
-4. Similarly, uncompress the dataset tar file and place the content into **data/dataset**
+4. Or download the preprocessed MusiqQA from Google Drive: [link](https://drive.google.com/file/d/16J1CVu7EZPD_22FxitZ0TpOd__FwzOmx/view?usp=drive_link)
+5. Similarly, uncompress the dataset tar file and place the content into **data/dataset**
 
 To double check if dataset or checkpoints are ready, run the following command:
 ```shell
@@ -44,7 +44,7 @@ If the structure is not correct or partly missing. You will see the error messag
 # Train the AudioLDM (latent diffusion part)
 python3 audioldm_train/train/latent_diffusion.py -c audioldm_train/config/2023_08_23_reproduce_audioldm/audioldm_original.yaml
 
-# Train the VAE (Optional)
+# Train the VAE
 # python3 audioldm_train/train/autoencoder.py -c audioldm_train/config/2023_11_13_vae_autoencoder/16k_64.yaml
 ```
 
@@ -81,6 +81,13 @@ python3 audioldm_train/eval.py --log_path all
 python3 audioldm_train/eval.py --log_path <path-to-the-experiment-folder>
 ```
 The evaluation result will be saved in a json file at the same level of the audio folder.
+
+## Evaluate the VAE
+```python
+
+# Evaluate all existing generated folder
+python3 run python3 audioldm_train/train/autoencoder_eval.py -c ${YAML_FILE}
+```
 
 ## Inference with the pretrained model
 Use the following syntax:
