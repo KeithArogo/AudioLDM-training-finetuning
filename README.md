@@ -164,7 +164,8 @@ Usage:
 To use this script, simply run it in your Python environment. It will create the necessary directories and YAML files based on the parameters dictionary configuration. This setup helps keep your experiment configurations organized and easy to manage.
 
 Running the Script:
-```python python create_ldm_experiment_yamls.py
+```python
+python create_ldm_experiment_yamls.py
 ```
 Customization:
 You can customize the content of the generated YAML files by modifying the yaml_content variable within the script. This allows you to tailor the configurations to meet the specific needs of your experiments.
