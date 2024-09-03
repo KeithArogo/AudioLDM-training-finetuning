@@ -116,7 +116,7 @@ Z:\\AudioLDM-training-finetuning\\
 Usage:
 To use this script, simply run it in your Python environment. It will create the necessary directories and files based on the experiments dictionary configuration. This setup helps keep your experimental data organized and easy to manage.'
 
-# YAML File Generator for LDM Parameter Experiments
+## YAML File Generator for LDM Parameter Experiments
 
 This Python script (`experimental_yaml_setup.py`) automates the creation of directories and YAML configuration files for conducting experiments with various parameters related to Latent Diffusion Models (LDM). The script is designed to help efficiently organize and manage multiple experiment configurations by generating the necessary directories and files based on predefined parameters and their proposed values.
 
@@ -145,6 +145,7 @@ Script Behavior
 
 Example Output
 After running the script, the directory structure will look like this:
+```python
 LDM_parameter_experiments/
 ├── Learning_Rate/
 │   ├── Learning_Rate_1.yaml
