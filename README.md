@@ -102,10 +102,10 @@ Directory Creation: The script checks if each experiment directory already exist
 
 File Creation: For each experiment, the specified number of sub-files is created inside its corresponding directory. The files are named sequentially as experiment_X.sub where X is the file number.
 
-### Example Output
+Example Output:
 
 After running the script, the directory structure will look like this:
-
+```python
 Z:\\AudioLDM-training-finetuning\\
 │
 ├── 7.experiments_warmupsteps\\
@@ -119,10 +119,8 @@ Z:\\AudioLDM-training-finetuning\\
 │   └── experiment_3.sub
 │
 ...
-
-
-Usage
-
+```
+Usage:
 To use this script, simply run it in your Python environment. It will create the necessary directories and files based on the experiments dictionary configuration. This setup helps keep your experimental data organized and easy to manage.'
 
 
