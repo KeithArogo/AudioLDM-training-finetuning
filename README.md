@@ -96,12 +96,6 @@ Use the following syntax:
 python3 audioldm_train/infer.py --config_yaml ${YAML_FILE}  --list_inference <the-filelist-you-want-to-generate> --reload_from_ckpt ${CHECKPOINT_PATH}
 ```
 
-For example:
-```shell
-# The generated audio will be saved at the same log folder if the pretrained model.
-python3 audioldm_train/infer.py --config_yaml audioldm_train/config/2023_08_23_reproduce_audioldm/audioldm_crossattn_flant5.yaml --list_inference tests/captionlist/inference_test.lst
-```
-
 The generated audio will be named with the caption by default. If you like to specify the filename to use, please checkout the format of *tests/captionlist/inference_test_with_filename.lst*.
 
 This repo only support inference with the model you trained by yourself. If you want to use the pretrained model directly, please use these two repos: [AudioLDM](https://github.com/haoheliu/AudioLDM) and [AudioLDM2](https://github.com/haoheliu/AudioLDM2).
