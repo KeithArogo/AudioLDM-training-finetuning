@@ -70,6 +70,62 @@ You can specify your own dataset following the same format as the provided Audio
 
 Note that the pretrained AudioLDM checkpoints are under CC-by-NC 4.0 license, which is not allowed for commerial use.
 
+## Experiment Directory and File Setup
+
+This script automates the creation of directories and sub-files for organizing experiments related to the AudioLDM project. The script is designed to help structure and manage multiple experiment configurations efficiently.
+
+### Experiment Structure
+
+The script uses a dictionary to define the structure, where each key represents an experiment name, and each value indicates the number of sub-files to be created within that experiment’s folder.
+
+Example configuration:
+```python
+experiments = {
+    "7.experiments_warmupsteps": 3,
+    "17.experiments_use_spatial_transformer": 3,
+    "18.experiments_transformer_depth": 3,
+    "11.experiments_out_channels": 3,
+    ...
+}
+
+### How It Works
+
+The script creates a set of folders and corresponding sub-files based on predefined experiment names and the number of files specified for each experiment. 
+
+### Root Directory
+
+All experiment folders and files will be created under the following root directory
+
+### Script Behavior
+
+Directory Creation: The script checks if each experiment directory already exists. If it doesn’t, the script creates it.
+
+File Creation: For each experiment, the specified number of sub-files is created inside its corresponding directory. The files are named sequentially as experiment_X.sub where X is the file number.
+
+### Example Output
+
+After running the script, the directory structure will look like this:
+
+Z:\\AudioLDM-training-finetuning\\
+│
+├── 7.experiments_warmupsteps\\
+│   ├── experiment_1.sub
+│   ├── experiment_2.sub
+│   └── experiment_3.sub
+│
+├── 17.experiments_use_spatial_transformer\\
+│   ├── experiment_1.sub
+│   ├── experiment_2.sub
+│   └── experiment_3.sub
+│
+...
+
+
+Usage
+
+To use this script, simply run it in your Python environment. It will create the necessary directories and files based on the experiments dictionary configuration. This setup helps keep your experimental data organized and easy to manage.'
+
+
 ## Evaluate the model output
 Automatically evaluation based on each of the folder with generated audio
 ```python
