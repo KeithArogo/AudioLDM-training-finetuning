@@ -116,6 +116,57 @@ Z:\\AudioLDM-training-finetuning\\
 Usage:
 To use this script, simply run it in your Python environment. It will create the necessary directories and files based on the experiments dictionary configuration. This setup helps keep your experimental data organized and easy to manage.'
 
+# YAML File Generator for LDM Parameter Experiments
+
+This Python script (`experimental_yaml_setup.py`) automates the creation of directories and YAML configuration files for conducting experiments with various parameters related to Latent Diffusion Models (LDM). The script is designed to help efficiently organize and manage multiple experiment configurations by generating the necessary directories and files based on predefined parameters and their proposed values.
+
+## How It Works
+
+The script iterates through a set of parameters, each associated with a list of proposed values. For each parameter, a directory is created under a base directory. Within each parameter's directory, a YAML file is generated for each proposed value, containing predefined content that can be customized for specific experiments.
+
+### Base Directory
+
+All experiment directories and YAML files will be created under a specified base directory:
+
+### Parameter Configuration
+
+The script uses a dictionary to define the parameters and their corresponding values. For example:
+
+```python
+parameters = {
+    'Learning_Rate': ['1.0e-4', '5.0e-5', '1.0e-5', '5.0e-6', '1.0e-6'],
+    'Batch_Size': ['2', '4', '8', '16'],
+    ...
+}
+```
+Script Behavior
+1. Directory Creation: For each parameter, a directory is created within the specified base directory.
+2. YAML File Creation: For each value associated with a parameter, a YAML file is created within the parameter's directory. Each file is populated with a predefined YAML content template.
+
+Example Output
+After running the script, the directory structure will look like this:
+LDM_parameter_experiments/
+├── Learning_Rate/
+│   ├── Learning_Rate_1.yaml
+│   ├── Learning_Rate_2.yaml
+│   ├── Learning_Rate_3.yaml
+│   ├── Learning_Rate_4.yaml
+│   └── Learning_Rate_5.yaml
+├── Batch_Size/
+│   ├── Batch_Size_1.yaml
+│   ├── Batch_Size_2.yaml
+│   ├── Batch_Size_3.yaml
+│   └── Batch_Size_4.yaml
+...
+```
+Usage:
+To use this script, simply run it in your Python environment. It will create the necessary directories and YAML files based on the parameters dictionary configuration. This setup helps keep your experiment configurations organized and easy to manage.
+
+Running the Script:
+```python python create_ldm_experiment_yamls.py
+```
+Customization:
+You can customize the content of the generated YAML files by modifying the yaml_content variable within the script. This allows you to tailor the configurations to meet the specific needs of your experiments.
 
 ## Evaluate the model output
 Automatically evaluation based on each of the folder with generated audio
