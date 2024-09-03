@@ -85,7 +85,7 @@ The evaluation result will be saved in a json file at the same level of the audi
 ## Evaluate the VAE
 ```python
 
-# Evaluate all existing generated folder
+# Evaluate specific VAE configuration
 python3 run python3 audioldm_train/train/autoencoder_eval.py -c ${YAML_FILE}
 ```
 
@@ -98,7 +98,6 @@ python3 audioldm_train/infer.py --config_yaml ${YAML_FILE}  --list_inference <th
 
 For example:
 ```shell
-# Please make sure you have train the model using audioldm_crossattn_flant5.yaml
 # The generated audio will be saved at the same log folder if the pretrained model.
 python3 audioldm_train/infer.py --config_yaml audioldm_train/config/2023_08_23_reproduce_audioldm/audioldm_crossattn_flant5.yaml --list_inference tests/captionlist/inference_test.lst
 ```
@@ -110,7 +109,7 @@ This repo only support inference with the model you trained by yourself. If you 
 ## Train the model using your own dataset
 Super easy, simply follow these steps:
 
-1. Prepare the metadata with the same format as the provided AudioCaps dataset. 
+1. Prepare the metadata with the same format as the provided dataset. 
 2. Register in the metadata of your dataset in **data/dataset/metadata/dataset_root.json**
 3. Use your dataset in the YAML file.
 
