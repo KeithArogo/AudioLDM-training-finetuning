@@ -92,12 +92,10 @@ experiments = {
 
 The script creates a set of folders and corresponding sub-files based on predefined experiment names and the number of files specified for each experiment. 
 
-### Root Directory
-
+Root Directory:
 All experiment folders and files will be created under the following root directory
 
-### Script Behavior
-
+Script Behavior:
 Directory Creation: The script checks if each experiment directory already exists. If it doesn’t, the script creates it.
 
 File Creation: For each experiment, the specified number of sub-files is created inside its corresponding directory. The files are named sequentially as experiment_X.sub where X is the file number.
