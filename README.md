@@ -87,7 +87,7 @@ experiments = {
     "11.experiments_out_channels": 3,
     ...
 }
-
+```
 ### How It Works
 
 The script creates a set of folders and corresponding sub-files based on predefined experiment names and the number of files specified for each experiment. 
