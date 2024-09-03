@@ -72,7 +72,7 @@ Note that the pretrained AudioLDM checkpoints are under CC-by-NC 4.0 license, wh
 
 ## Experiment Directory and File Setup
 
-This script automates the creation of directories and sub-files for organizing experiments related to the AudioLDM project. The script is designed to help structure and manage multiple experiment configurations efficiently.
+This script (`create_experiment_dirs_and_files.py`) automates the creation of directories and sub-files for organizing experiments related to the AudioLDM project. The script is designed to help structure and manage multiple experiment configurations efficiently.
 
 ### Experiment Structure
 
