@@ -28,8 +28,8 @@ poetry install
 ## Download checkpoints and dataset
 1. Download checkpoints from Google Drive: [link](https://drive.google.com/file/d/1T6EnuAHIc8ioeZ9kB1OZ_WGgwXAVGOZS/view?usp=drive_link). The checkpoints including pretrained VAE, AudioMAE, CLAP, 16kHz HiFiGAN, and 48kHz HiFiGAN.
 2. Uncompress the checkpoint tar file and place the content into **data/checkpoints/**
-4. Or download the preprocessed MusiqQA from Google Drive: [link](https://drive.google.com/file/d/1-4X5l5Q8CP6Jcv8Dpu7e0MaU0VDLmgxN/view?usp=sharing)
-5. Similarly, uncompress the dataset tar file and place the content into **data/dataset**
+3. Download the preprocessed dataset from Google Drive: [link](https://drive.google.com/file/d/1-4X5l5Q8CP6Jcv8Dpu7e0MaU0VDLmgxN/view?usp=sharing)
+4. Similarly, uncompress the dataset tar file and place the content into **data/dataset**
 
 To double check if dataset or checkpoints are ready, run the following command:
 ```shell
